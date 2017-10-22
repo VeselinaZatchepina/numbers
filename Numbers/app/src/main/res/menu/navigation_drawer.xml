@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_numbers"
+            android:icon="@drawable/ic_exposure_zero_white_24dp"
+            android:title="@string/menu_numbers"/>
+
+        <item
+            android:id="@+id/menu_saved_numbers"
+            android:icon="@drawable/ic_assignment_turned_in_white_24dp"
+            android:title="@string/menu_saved_numbers"/>
+
+        <item
+            android:id="@+id/menu_history"
+            android:icon="@drawable/ic_timer_white_24dp"
+            android:title="@string/menu_history"/>
+    </group>
+
+    <item
+        android:id="@+id/other"
+        android:title="@string/menu_title_group">
+        <menu>
+            <item
+                android:id="@+id/menu_about"
+                android:icon="@drawable/ic_subject_white_24dp"
+                android:title="@string/menu_about"/>
+        </menu>
+    </item>
+
+</menu>

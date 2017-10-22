@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Navigation header -->
+    <dimen name="navigation_header_height">160dp</dimen>
+
+    <!-- Fab -->
+    <dimen name="fab_margin">16dp</dimen>
+
+</resources>
