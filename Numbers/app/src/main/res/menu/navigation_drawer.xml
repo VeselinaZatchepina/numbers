@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_numbers"
-            android:icon="@drawable/ic_exposure_zero_white_24dp"
+            android:icon="@drawable/ic_looks_one_white_24dp"
             android:title="@string/menu_numbers"/>
 
         <item
