@@ -76,7 +76,7 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
     }
 
     private int setFabImageResourceId() {
-        return R.drawable.ic_add_white_24dp;
+        return R.drawable.ic_check_white_24dp;
     }
 
     private void setFabBackgroundImage(FloatingActionButton fab, int imageResourceId) {
