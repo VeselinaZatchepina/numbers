@@ -21,3 +21,13 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+// Define versions in a single place
+ext {
+    // App dependencies
+    butterknifeVersion = '8.6.0'
+    rxjavaVersion = '2.1.3'
+    rxandroidVersion = '2.0.1'
+    sqlbriteVersion = '2.0.0'
+    coreLibraryVersion = '26.0.0-alpha1'
+}
