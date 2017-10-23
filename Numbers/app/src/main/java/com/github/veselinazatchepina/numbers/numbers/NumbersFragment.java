@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import com.github.veselinazatchepina.numbers.R;
 
 
-public class NumbersFragment extends Fragment {
+public class NumbersFragment extends Fragment implements NumbersContract.View {
+
+    private NumbersContract.Presenter mPresenter;
 
 
     public NumbersFragment() {
@@ -26,4 +28,13 @@ public class NumbersFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_numbers, container, false);
     }
 
+    @Override
+    public void setPresenter(NumbersContract.Presenter presenter) {
+
+    }
+
+    @Override
+    public void setNumberDescription() {
+
+    }
 }
