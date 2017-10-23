@@ -6,6 +6,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,7 +24,7 @@ import com.github.veselinazatchepina.numbers.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NavigationDrawerAbstractActivity extends AppCompatActivity
+public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.drawer_layout)
@@ -43,6 +45,7 @@ public class NavigationDrawerAbstractActivity extends AppCompatActivity
         ButterKnife.bind(this);
         defineNavigationDrawer();
         defineFab();
+        defineFragment();
     }
 
     private void defineNavigationDrawer() {
@@ -62,7 +65,7 @@ public class NavigationDrawerAbstractActivity extends AppCompatActivity
         mNavigationView.setNavigationItemSelectedListener(this);
     }
 
-    public void defineFab() {
+    private void defineFab() {
         setFabBackgroundImage(mFloatingActionButton, mFabImageResourceId);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,11 +75,11 @@ public class NavigationDrawerAbstractActivity extends AppCompatActivity
         });
     }
 
-    public int setFabImageResourceId() {
+    private int setFabImageResourceId() {
         return R.drawable.ic_add_white_24dp;
     }
 
-    public void setFabBackgroundImage(FloatingActionButton fab, int imageResourceId) {
+    private void setFabBackgroundImage(FloatingActionButton fab, int imageResourceId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             fab.setImageDrawable(getResources().getDrawable(imageResourceId, getTheme()));
         } else {
@@ -84,10 +87,23 @@ public class NavigationDrawerAbstractActivity extends AppCompatActivity
         }
     }
 
-    public void defineActionWhenFabIsPressed() {
+    private void defineActionWhenFabIsPressed() {
         Intent intent = null;
         startActivity(intent);
     }
+
+    private void defineFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
+        if (currentFragment == null) {
+            currentFragment = createFragment();
+            fragmentManager.beginTransaction()
+                    .add(R.id.fragment_container, currentFragment)
+                    .commit();
+        }
+    }
+
+    public abstract Fragment createFragment();
 
     @Override
     public void onBackPressed() {

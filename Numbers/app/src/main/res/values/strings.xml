@@ -10,4 +10,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- NumbersFragment -->
+    <string name="edit_text_hint">Enter number</string>
+    <string name="spinner_hint">Choose query type</string>
+    <string name="button_text">Submit</string>
+    <string name="empty_description_text">No description</string>
+
 </resources>
