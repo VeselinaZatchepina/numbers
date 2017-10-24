@@ -31,7 +31,7 @@ public class NumbersRemoteDataSource implements NumbersDataSource {
     }
 
     @Override
-    public Flowable<Number> getNumberDescription(String number) {
+    public Flowable<Number> getNumber(String number) {
         return startRequest("http://numbersapi.com/", number);
     }
 

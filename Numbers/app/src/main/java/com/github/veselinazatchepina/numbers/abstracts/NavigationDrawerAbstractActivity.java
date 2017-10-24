@@ -2,9 +2,7 @@ package com.github.veselinazatchepina.numbers.abstracts;
 
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,7 +15,6 @@ import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.github.veselinazatchepina.numbers.R;
 
@@ -33,10 +30,6 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
     NavigationView mNavigationView;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.fab)
-    FloatingActionButton mFloatingActionButton;
-
-    int mFabImageResourceId = setFabImageResourceId();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +37,6 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
         setContentView(R.layout.activity_navigation_drawer);
         ButterKnife.bind(this);
         defineNavigationDrawer();
-        defineFab();
         defineFragment();
         createPresenter();
     }
@@ -64,33 +56,6 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
         s.setSpan(new TextAppearanceSpan(this, R.style.NavigationViewStyle), 0, s.length(), 0);
         tools.setTitle(s);
         mNavigationView.setNavigationItemSelectedListener(this);
-    }
-
-    private void defineFab() {
-        setFabBackgroundImage(mFloatingActionButton, mFabImageResourceId);
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                defineActionWhenFabIsPressed();
-            }
-        });
-    }
-
-    private int setFabImageResourceId() {
-        return R.drawable.ic_check_white_24dp;
-    }
-
-    private void setFabBackgroundImage(FloatingActionButton fab, int imageResourceId) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            fab.setImageDrawable(getResources().getDrawable(imageResourceId, getTheme()));
-        } else {
-            fab.setImageDrawable(getResources().getDrawable(imageResourceId));
-        }
-    }
-
-    private void defineActionWhenFabIsPressed() {
-        Intent intent = null;
-        startActivity(intent);
     }
 
     private void defineFragment() {

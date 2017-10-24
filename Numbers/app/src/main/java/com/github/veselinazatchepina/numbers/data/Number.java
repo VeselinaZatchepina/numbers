@@ -52,6 +52,9 @@ public class Number {
 
     @Override
     public String toString() {
-        return "ClassPojo [text = " + text + ", number = " + number + ", type = " + type + ", found = " + found + "]";
+        return "Number [text = " + text +
+                ", number = " + number +
+                ", type = " + type +
+                ", found = " + found + "]";
     }
 }
