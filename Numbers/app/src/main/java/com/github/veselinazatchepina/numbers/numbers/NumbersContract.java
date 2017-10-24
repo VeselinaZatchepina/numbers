@@ -8,7 +8,7 @@ public interface NumbersContract {
 
     interface View extends BaseView<Presenter> {
 
-        void setNumberDescription();
+        void setNumberDescription(String description);
     }
 
     interface Presenter extends BasePresenter {

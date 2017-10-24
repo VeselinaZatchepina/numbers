@@ -1,5 +1,7 @@
 package com.github.veselinazatchepina.numbers.data.remote;
 
+import android.util.Log;
+
 import com.github.veselinazatchepina.numbers.data.Number;
 import com.github.veselinazatchepina.numbers.data.NumbersDataSource;
 
@@ -10,14 +12,27 @@ import io.reactivex.Flowable;
 
 public class NumbersRemoteDataSource implements NumbersDataSource {
 
+    private static NumbersRemoteDataSource INSTANCE = null;
+
+    public static NumbersRemoteDataSource getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new NumbersRemoteDataSource();
+        }
+        return INSTANCE;
+    }
+
+    private NumbersRemoteDataSource() {
+    }
+
     @Override
     public Flowable<List<Number>> getNumbers() {
         return null;
     }
 
     @Override
-    public Flowable<Number> getNumber() {
-        return null;
+    public String getNumber() {
+        Log.v("OK", "OK");
+        return "hello hello me dear!";
     }
 
     @Override

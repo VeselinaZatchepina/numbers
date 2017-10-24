@@ -46,6 +46,7 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
         defineNavigationDrawer();
         defineFab();
         defineFragment();
+        createPresenter();
     }
 
     private void defineNavigationDrawer() {
@@ -104,6 +105,8 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
     }
 
     public abstract Fragment createFragment();
+
+    public abstract void createPresenter();
 
     @Override
     public void onBackPressed() {

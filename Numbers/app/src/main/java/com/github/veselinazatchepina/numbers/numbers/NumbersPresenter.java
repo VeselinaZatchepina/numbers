@@ -32,6 +32,6 @@ public class NumbersPresenter implements NumbersContract.Presenter {
 
     @Override
     public void populateNumberCharacteristics() {
-
+        mNumbersView.setNumberDescription(mNumbersRepository.getNumber());
     }
 }
