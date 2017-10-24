@@ -9,7 +9,7 @@ public interface NumbersDataSource {
 
     Flowable<List<Number>> getNumbers();
 
-    String getNumberDescription(String number);
+    Flowable<Number> getNumberDescription(String number);
 
     void saveNumber();
 

@@ -32,4 +32,7 @@ ext {
     coreLibraryVersion = '26.0.0-alpha1'
     retrofitVersion = '2.3.0'
     okhttpVersion = '3.9.0'
+    rxjavaVersion = '2.1.5'
+    rxandroidVersion = '2.0.1'
+    retrofitAdapterVersion = '1.0.0'
 }

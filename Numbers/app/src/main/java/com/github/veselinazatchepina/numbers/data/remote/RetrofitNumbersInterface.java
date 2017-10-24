@@ -1,15 +1,15 @@
 package com.github.veselinazatchepina.numbers.data.remote;
 
 
-import java.util.Map;
+import com.github.veselinazatchepina.numbers.data.Number;
 
-import retrofit2.Call;
+import io.reactivex.Flowable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface RetrofitNumbersInterface {
 
     @GET("/{number}?json")
-    Call<Map<String, String>> getNumberDescription(@Path("number") String number);
+    Flowable<Number> getNumberDescription(@Path("number") String number);
 
 }

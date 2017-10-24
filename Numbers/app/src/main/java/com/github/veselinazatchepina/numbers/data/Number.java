@@ -1,51 +1,57 @@
 package com.github.veselinazatchepina.numbers.data;
 
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Number {
+    @SerializedName("text")
+    @Expose
+    private String text;
+    @SerializedName("number")
+    @Expose
+    private String number;
+    @SerializedName("type")
+    @Expose
+    private String type;
+    @SerializedName("found")
+    @Expose
+    private String found;
 
-    private String mId;
-    private long mNumberValue;
-    private String mQueryType;
-    private String mDescription;
-    private String mQueryDate;
-
-    public String getId() {
-        return mId;
+    public String getText() {
+        return text;
     }
 
-    public void setId(String id) {
-        mId = id;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public long getNumberValue() {
-        return mNumberValue;
+    public String getNumber() {
+        return number;
     }
 
-    public void setNumberValue(long numberValue) {
-        mNumberValue = numberValue;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getQueryType() {
-        return mQueryType;
+    public String getType() {
+        return type;
     }
 
-    public void setQueryType(String queryType) {
-        mQueryType = queryType;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getDescription() {
-        return mDescription;
+    public String getFound() {
+        return found;
     }
 
-    public void setDescription(String description) {
-        mDescription = description;
+    public void setFound(String found) {
+        this.found = found;
     }
 
-    public String getQueryDate() {
-        return mQueryDate;
-    }
-
-    public void setQueryDate(String queryDate) {
-        mQueryDate = queryDate;
+    @Override
+    public String toString() {
+        return "ClassPojo [text = " + text + ", number = " + number + ", type = " + type + ", found = " + found + "]";
     }
 }

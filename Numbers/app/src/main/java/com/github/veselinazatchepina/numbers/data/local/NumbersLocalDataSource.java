@@ -31,7 +31,7 @@ public class NumbersLocalDataSource implements NumbersDataSource {
     }
 
     @Override
-    public String getNumberDescription(String number) {
+    public Flowable<Number> getNumberDescription(String number) {
         return null;
     }
 
