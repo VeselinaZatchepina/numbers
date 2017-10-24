@@ -15,6 +15,6 @@ public interface NumbersContract {
 
         void saveNumber();
 
-        void populateNumberCharacteristics();
+        void getNumberDescription(String number);
     }
 }

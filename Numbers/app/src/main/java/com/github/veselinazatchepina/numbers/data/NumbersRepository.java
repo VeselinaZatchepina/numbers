@@ -33,8 +33,8 @@ public class NumbersRepository implements NumbersDataSource {
     }
 
     @Override
-    public String getNumber() {
-        return mNumbersRemoteDataSource.getNumber();
+    public String getNumberDescription(String number) {
+        return mNumbersRemoteDataSource.getNumberDescription(number);
     }
 
     @Override

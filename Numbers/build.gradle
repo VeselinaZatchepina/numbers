@@ -30,4 +30,6 @@ ext {
     rxandroidVersion = '2.0.1'
     sqlbriteVersion = '2.0.0'
     coreLibraryVersion = '26.0.0-alpha1'
+    retrofitVersion = '2.3.0'
+    okhttpVersion = '3.9.0'
 }

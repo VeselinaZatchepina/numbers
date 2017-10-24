@@ -35,6 +35,11 @@ dependencies {
     //SqlBrite
     compile "com.squareup.sqlbrite2:sqlbrite:$rootProject.sqlbriteVersion"
 
+    //Retrofit
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    compile "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+
     compile "com.android.support:appcompat-v7:$rootProject.coreLibraryVersion"
     compile "com.android.support:design:$rootProject.coreLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.coreLibraryVersion"

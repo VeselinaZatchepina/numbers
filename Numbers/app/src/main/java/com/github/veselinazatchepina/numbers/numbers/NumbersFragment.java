@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.veselinazatchepina.numbers.R;
@@ -18,6 +19,8 @@ import butterknife.Unbinder;
 
 public class NumbersFragment extends Fragment implements NumbersContract.View {
 
+    @BindView(R.id.number_value)
+    EditText mNumberValue;
     @BindView(R.id.submit_button)
     Button mSubmitButton;
     @BindView(R.id.number_description)
@@ -41,7 +44,7 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPresenter.populateNumberCharacteristics();
+                mPresenter.getNumberDescription(mNumberValue.getText().toString());
             }
         });
         return rootView;

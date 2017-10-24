@@ -31,7 +31,7 @@ public class NumbersLocalDataSource implements NumbersDataSource {
     }
 
     @Override
-    public String getNumber() {
+    public String getNumberDescription(String number) {
         return null;
     }
 
