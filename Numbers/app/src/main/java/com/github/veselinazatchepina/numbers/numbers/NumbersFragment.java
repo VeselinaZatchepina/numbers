@@ -8,8 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.github.veselinazatchepina.numbers.R;
@@ -29,6 +31,8 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
     TextView mDescription;
     @BindView(R.id.fab)
     FloatingActionButton mFloatingActionButton;
+    @BindView(R.id.query_type_spinner)
+    Spinner mSpinner;
     private Unbinder unbinder;
 
     private NumbersContract.Presenter mPresenter;
@@ -49,10 +53,12 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPresenter.getNumberDescription(mNumberValue.getText().toString());
+                mPresenter.getNumberDescription(mNumberValue.getText().toString(),
+                        mSpinner.getSelectedItem().toString());
             }
         });
         defineFab();
+        defineQueryTypeSpinner();
         return rootView;
     }
 
@@ -64,12 +70,6 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
     @Override
     public void setNumberDescription(String description) {
         mDescription.setText(description);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
     private void defineFab() {
@@ -96,5 +96,18 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
 
     private void defineActionWhenFabIsPressed() {
         mPresenter.saveNumber();
+    }
+
+    private void defineQueryTypeSpinner() {
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item);
+        spinnerArrayAdapter.addAll(getResources().getStringArray(R.array.query_types));
+        mSpinner.setAdapter(spinnerArrayAdapter);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

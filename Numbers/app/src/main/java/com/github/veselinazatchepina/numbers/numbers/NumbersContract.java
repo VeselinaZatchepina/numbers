@@ -15,6 +15,6 @@ public interface NumbersContract {
 
         void saveNumber();
 
-        void getNumberDescription(String number);
+        void getNumberDescription(String number, String queryType);
     }
 }

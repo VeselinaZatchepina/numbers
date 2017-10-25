@@ -33,8 +33,8 @@ public class NumbersRepository implements NumbersDataSource {
     }
 
     @Override
-    public Flowable<Number> getNumber(String number) {
-        return mNumbersRemoteDataSource.getNumber(number);
+    public Flowable<Number> getNumber(String number, String queryType) {
+        return mNumbersRemoteDataSource.getNumber(number, queryType);
     }
 
     @Override

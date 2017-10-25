@@ -49,8 +49,8 @@ public class NumbersPresenter implements NumbersContract.Presenter {
     }
 
     @Override
-    public void getNumberDescription(String number) {
-        mCompositeDisposable.add(mNumbersRepository.getNumber(number)
+    public void getNumberDescription(String number, String queryType) {
+        mCompositeDisposable.add(mNumbersRepository.getNumber(number, queryType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSubscriber<Number>() {

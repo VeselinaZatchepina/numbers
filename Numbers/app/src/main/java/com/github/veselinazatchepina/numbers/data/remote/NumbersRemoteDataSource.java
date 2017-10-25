@@ -31,13 +31,13 @@ public class NumbersRemoteDataSource implements NumbersDataSource {
     }
 
     @Override
-    public Flowable<Number> getNumber(String number) {
-        return startRequest("http://numbersapi.com/", number);
+    public Flowable<Number> getNumber(String number, String queryType) {
+        return startRequest("http://numbersapi.com/", number, queryType);
     }
 
-    private Flowable<Number> startRequest(String baseUrl, String request) {
+    private Flowable<Number> startRequest(String baseUrl, String request, String queryType) {
         RetrofitNumbersInterface service = defineRetrofit(baseUrl).create(RetrofitNumbersInterface.class);
-        return service.getNumberDescription(request);
+        return service.getNumberDescription(request, queryType);
     }
 
     private Retrofit defineRetrofit(String baseUrl) {

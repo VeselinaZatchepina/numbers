@@ -41,7 +41,7 @@ public class NumbersLocalDataSource implements NumbersDataSource {
     }
 
     @Override
-    public Flowable<Number> getNumber(String number) {
+    public Flowable<Number> getNumber(String number, String queryType) {
         return null;
     }
 

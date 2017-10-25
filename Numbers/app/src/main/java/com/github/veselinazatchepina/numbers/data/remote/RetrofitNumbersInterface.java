@@ -9,7 +9,8 @@ import retrofit2.http.Path;
 
 public interface RetrofitNumbersInterface {
 
-    @GET("/{number}?json")
-    Flowable<Number> getNumberDescription(@Path("number") String number);
+    @GET("/{number}/{type}?json")
+    Flowable<Number> getNumberDescription(@Path("number") String number,
+                                          @Path("type") String type);
 
 }
