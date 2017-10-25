@@ -18,6 +18,10 @@ public class Number {
     @Expose
     private String found;
 
+    private String id;
+
+    private String date;
+
     public String getText() {
         return text;
     }
@@ -50,11 +54,29 @@ public class Number {
         this.found = found;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "Number [text = " + text +
                 ", number = " + number +
                 ", type = " + type +
-                ", found = " + found + "]";
+                ", found = " + found +
+                ", id = " + id +
+                ", date = " + date + "]";
     }
 }

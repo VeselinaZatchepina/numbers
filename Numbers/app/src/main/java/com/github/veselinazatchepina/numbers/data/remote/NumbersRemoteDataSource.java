@@ -49,7 +49,7 @@ public class NumbersRemoteDataSource implements NumbersDataSource {
     }
 
     @Override
-    public void saveNumber() {
+    public void saveNumber(Number number) {
 
     }
 

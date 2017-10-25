@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.veselinazatchepina.numbers.R;
 
@@ -96,6 +95,6 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
     }
 
     private void defineActionWhenFabIsPressed() {
-        Toast.makeText(getActivity(), "Hi", Toast.LENGTH_LONG).show();
+        mPresenter.saveNumber();
     }
 }

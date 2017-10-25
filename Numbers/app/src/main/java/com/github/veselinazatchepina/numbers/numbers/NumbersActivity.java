@@ -6,6 +6,8 @@ import com.github.veselinazatchepina.numbers.abstracts.NavigationDrawerAbstractA
 import com.github.veselinazatchepina.numbers.data.NumbersRepository;
 import com.github.veselinazatchepina.numbers.data.local.NumbersLocalDataSource;
 import com.github.veselinazatchepina.numbers.data.remote.NumbersRemoteDataSource;
+import com.github.veselinazatchepina.numbers.utils.BaseSchedulerProvider;
+import com.github.veselinazatchepina.numbers.utils.SchedulerProvider;
 
 public class NumbersActivity extends NavigationDrawerAbstractActivity {
 
@@ -22,7 +24,11 @@ public class NumbersActivity extends NavigationDrawerAbstractActivity {
     public void createPresenter() {
         NumbersRepository numbersRepository = NumbersRepository.getInstance(
                 NumbersRemoteDataSource.getInstance(),
-                NumbersLocalDataSource.getInstance(this));
+                NumbersLocalDataSource.getInstance(this, provideSchedulerProvider()));
         mNumbersPresenter = new NumbersPresenter(numbersRepository, mNumbersView);
+    }
+
+    public static BaseSchedulerProvider provideSchedulerProvider() {
+        return SchedulerProvider.getInstance();
     }
 }
