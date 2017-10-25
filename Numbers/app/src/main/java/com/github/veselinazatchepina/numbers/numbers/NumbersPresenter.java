@@ -42,10 +42,13 @@ public class NumbersPresenter implements NumbersContract.Presenter {
     @Override
     public void saveNumber() {
         mNumberForSave.setId(UUID.randomUUID().toString());
-        Calendar currentDateInstance = Calendar.getInstance();
-        String currentDate = String.format("%1$td %1$tb %1$tY", currentDateInstance);
-        mNumberForSave.setDate(currentDate);
+        mNumberForSave.setDate(getCurrentDate());
         mNumbersRepository.saveNumber(mNumberForSave);
+    }
+
+    private String getCurrentDate() {
+        Calendar currentDateInstance = Calendar.getInstance();
+        return String.format("%1$td %1$tb %1$tY", currentDateInstance);
     }
 
     @Override
