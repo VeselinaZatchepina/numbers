@@ -125,9 +125,7 @@ public class NumbersPresenter implements NumbersContract.Presenter {
     private String createDescriptionFromNumbersList(List<Number> numbers) {
         StringBuilder builder = new StringBuilder();
         for (Number number : numbers) {
-            builder.append(number.getNumber())
-                    .append(": ")
-                    .append(number.getText())
+            builder.append(number.getText())
                     .append("\n");
         }
         return builder.toString();
