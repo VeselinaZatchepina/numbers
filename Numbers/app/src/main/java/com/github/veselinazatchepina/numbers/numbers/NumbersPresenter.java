@@ -74,4 +74,11 @@ public class NumbersPresenter implements NumbersContract.Presenter {
                     }
                 }));
     }
+
+    @Override
+    public void defineSpinnerPosition(CharSequence charSequence) {
+        if (charSequence.toString().contains("/")) {
+            mNumbersView.setSpinnerPosition(2);
+        }
+    }
 }

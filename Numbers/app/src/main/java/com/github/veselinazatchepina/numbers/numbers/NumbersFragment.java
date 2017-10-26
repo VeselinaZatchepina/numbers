@@ -5,9 +5,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +53,15 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_numbers, container, false);
         unbinder = ButterKnife.bind(this, rootView);
+        defineEditText();
+        defineQueryTypeSpinner();
+        defineSpinnerListener();
+        defineSubmitButton();
+        defineFab();
+        return rootView;
+    }
+
+    private void defineSubmitButton() {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,9 +69,25 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
                         mSpinner.getSelectedItem().toString());
             }
         });
-        defineFab();
-        defineQueryTypeSpinner();
-        return rootView;
+    }
+
+    private void defineEditText() {
+        mNumberValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    mPresenter.defineSpinnerPosition(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     @Override
@@ -103,6 +131,25 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
                 android.R.layout.simple_spinner_dropdown_item);
         spinnerArrayAdapter.addAll(getResources().getStringArray(R.array.query_types));
         mSpinner.setAdapter(spinnerArrayAdapter);
+    }
+
+    private void defineSpinnerListener() {
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                mPresenter.defineSpinnerPosition(mNumberValue.getText().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    @Override
+    public void setSpinnerPosition(int position) {
+        mSpinner.setSelection(position);
     }
 
     @Override
