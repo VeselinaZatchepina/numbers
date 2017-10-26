@@ -7,7 +7,7 @@ import io.reactivex.Flowable;
 
 public interface NumbersDataSource {
 
-    Flowable<List<Number>> getNumbers();
+    Flowable<List<Number>> getNumbers(String number, String queryType);
 
     Flowable<Number> getNumber(String number, String queryType);
 

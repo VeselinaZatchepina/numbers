@@ -5,8 +5,11 @@ import com.github.veselinazatchepina.numbers.data.NumbersDataSource;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Flowable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,18 +29,31 @@ public class NumbersRemoteDataSource implements NumbersDataSource {
     }
 
     @Override
-    public Flowable<List<Number>> getNumbers() {
-        return null;
+    public Flowable<List<Number>> getNumbers(String number, String queryType) {
+        return startNumbersRequest("http://numbersapi.com/", number, queryType);
     }
 
     @Override
     public Flowable<Number> getNumber(String number, String queryType) {
-        return startRequest("http://numbersapi.com/", number, queryType);
+        return startNumberRequest("http://numbersapi.com/", number, queryType);
     }
 
-    private Flowable<Number> startRequest(String baseUrl, String request, String queryType) {
+    private Flowable<Number> startNumberRequest(String baseUrl, String request, String queryType) {
         RetrofitNumbersInterface service = defineRetrofit(baseUrl).create(RetrofitNumbersInterface.class);
         return service.getNumberDescription(request, queryType);
+    }
+
+    private Flowable<List<Number>> startNumbersRequest(String baseUrl, String request, String queryType) {
+        final RetrofitNumbersInterface service = defineRetrofit(baseUrl).create(RetrofitNumbersInterface.class);
+        return service.getNumbersDescription(request, queryType)
+                .flatMap(new Function<Map<String, Number>, Flowable<Number>>() {
+                    @Override
+                    public Flowable<Number> apply(@NonNull Map<String, Number> stringNumberMap) throws Exception {
+                        return Flowable.fromIterable(stringNumberMap.values());
+                    }
+                })
+                .toList()
+                .toFlowable();
     }
 
     private Retrofit defineRetrofit(String baseUrl) {

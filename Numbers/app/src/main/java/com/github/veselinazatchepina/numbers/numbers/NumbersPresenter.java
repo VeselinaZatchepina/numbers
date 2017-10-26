@@ -5,6 +5,7 @@ import com.github.veselinazatchepina.numbers.data.Number;
 import com.github.veselinazatchepina.numbers.data.NumbersDataSource;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,6 +22,8 @@ public class NumbersPresenter implements NumbersContract.Presenter {
     private CompositeDisposable mCompositeDisposable;
 
     private Number mNumberForSave = null;
+
+    private List<Number> mNumbersForSave = null;
 
     public NumbersPresenter(NumbersDataSource numbersRepository, NumbersContract.View numbersView) {
         mNumbersRepository = numbersRepository;
@@ -41,9 +44,22 @@ public class NumbersPresenter implements NumbersContract.Presenter {
 
     @Override
     public void saveNumber() {
-        mNumberForSave.setId(UUID.randomUUID().toString());
-        mNumberForSave.setDate(getCurrentDate());
-        mNumbersRepository.saveNumber(mNumberForSave);
+        if (mNumberForSave != null) {
+            setIdAndDateForNumber(mNumberForSave);
+            mNumberForSave = null;
+        }
+        if (!mNumbersForSave.isEmpty()) {
+            for (Number number : mNumbersForSave) {
+                setIdAndDateForNumber(number);
+            }
+            mNumbersForSave = null;
+        }
+    }
+
+    private void setIdAndDateForNumber(Number number) {
+        number.setId(UUID.randomUUID().toString());
+        number.setDate(getCurrentDate());
+        mNumbersRepository.saveNumber(number);
     }
 
     private String getCurrentDate() {
@@ -52,7 +68,38 @@ public class NumbersPresenter implements NumbersContract.Presenter {
     }
 
     @Override
-    public void getNumberDescription(String number, String queryType) {
+    public void getNumberDescription(final String number, String queryType) {
+        if (number.contains("..") || number.contains(",")) {
+            getDescriptionFromNumbersList(number, queryType);
+        } else {
+            getDescriptionFromNumber(number, queryType);
+        }
+    }
+
+    private void getDescriptionFromNumbersList(String number, String queryType) {
+        mCompositeDisposable.add(mNumbersRepository.getNumbers(number, queryType)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSubscriber<List<Number>>() {
+                    @Override
+                    public void onNext(List<Number> numbers) {
+                        mNumbersView.setNumberDescription(createDescriptionFromNumbersList(numbers));
+                        mNumbersForSave = numbers;
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    private void getDescriptionFromNumber(String number, String queryType) {
         mCompositeDisposable.add(mNumbersRepository.getNumber(number, queryType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -73,6 +120,17 @@ public class NumbersPresenter implements NumbersContract.Presenter {
 
                     }
                 }));
+    }
+
+    private String createDescriptionFromNumbersList(List<Number> numbers) {
+        StringBuilder builder = new StringBuilder();
+        for (Number number : numbers) {
+            builder.append(number.getNumber())
+                    .append(": ")
+                    .append(number.getText())
+                    .append("\n");
+        }
+        return builder.toString();
     }
 
     @Override
