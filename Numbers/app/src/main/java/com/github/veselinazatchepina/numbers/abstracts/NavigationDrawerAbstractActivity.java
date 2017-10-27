@@ -17,6 +17,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.github.veselinazatchepina.numbers.R;
+import com.github.veselinazatchepina.numbers.numbers.NumbersActivity;
+import com.github.veselinazatchepina.numbers.savedhistorynumbers.SavedOrHistoryActivity;
+import com.github.veselinazatchepina.numbers.utils.BaseSchedulerProvider;
+import com.github.veselinazatchepina.numbers.utils.SchedulerProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,6 +77,10 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
 
     public abstract void createPresenter();
 
+    public static BaseSchedulerProvider provideSchedulerProvider() {
+        return SchedulerProvider.getInstance();
+    }
+
     @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -88,13 +96,13 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
         Intent intent = null;
         switch (item.getItemId()) {
             case R.id.menu_numbers:
-                intent = null;
+                intent = NumbersActivity.newIntent(this, getString(R.string.numbers_activity_title));;
                 break;
             case R.id.menu_saved_numbers:
-                intent = null;
+                intent = SavedOrHistoryActivity.newIntent(this, getString(R.string.saved_numbers_activity_title));
                 break;
             case R.id.menu_history:
-                intent = null;
+                intent = SavedOrHistoryActivity.newIntent(this, getString(R.string.history_numbers_activity_title));
                 break;
             case R.id.menu_about:
                 intent = null;

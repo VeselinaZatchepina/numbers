@@ -28,13 +28,13 @@ public class NumbersRepository implements NumbersDataSource {
     }
 
     @Override
-    public Flowable<List<Number>> getNumbers(String number, String queryType) {
-        return mNumbersRemoteDataSource.getNumbers(number, queryType);
+    public Flowable<List<Number>> getNumbersByItsValue(String number, String numberType) {
+        return mNumbersRemoteDataSource.getNumbersByItsValue(number, numberType);
     }
 
     @Override
-    public Flowable<Number> getNumber(String number, String queryType) {
-        return mNumbersRemoteDataSource.getNumber(number, queryType);
+    public Flowable<Number> getNumberByItsValue(String number, String numberType) {
+        return mNumbersRemoteDataSource.getNumberByItsValue(number, numberType);
     }
 
     @Override

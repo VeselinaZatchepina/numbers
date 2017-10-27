@@ -77,7 +77,7 @@ public class NumbersPresenter implements NumbersContract.Presenter {
     }
 
     private void getDescriptionFromNumbersList(String number, String queryType) {
-        mCompositeDisposable.add(mNumbersRepository.getNumbers(number, queryType)
+        mCompositeDisposable.add(mNumbersRepository.getNumbersByItsValue(number, queryType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSubscriber<List<Number>>() {
@@ -100,7 +100,7 @@ public class NumbersPresenter implements NumbersContract.Presenter {
     }
 
     private void getDescriptionFromNumber(String number, String queryType) {
-        mCompositeDisposable.add(mNumbersRepository.getNumber(number, queryType)
+        mCompositeDisposable.add(mNumbersRepository.getNumberByItsValue(number, queryType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSubscriber<Number>() {

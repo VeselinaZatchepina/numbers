@@ -1,4 +1,4 @@
-package com.github.veselinazatchepina.numbers.numbers;
+package com.github.veselinazatchepina.numbers.savedhistorynumbers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,23 +9,24 @@ import com.github.veselinazatchepina.numbers.data.NumbersRepository;
 import com.github.veselinazatchepina.numbers.data.local.NumbersLocalDataSource;
 import com.github.veselinazatchepina.numbers.data.remote.NumbersRemoteDataSource;
 
-public class NumbersActivity extends NavigationDrawerAbstractActivity {
 
-    private static final String NUMBERS_TITLE = "numbers_title";
+public class SavedOrHistoryActivity extends NavigationDrawerAbstractActivity {
 
-    private NumbersFragment mNumbersView;
-    private NumbersPresenter mNumbersPresenter;
+    private static final String SAVED_OR_HISTORY_TITLE = "saved_or_history_title";
+
+    private SavedOrHistoryFragment mSavedOrHistoryView;
+    private SavedOrHistoryPresenter mSavedOrHistoryPresenter;
 
     public static Intent newIntent(Context context, String title) {
-        Intent intent = new Intent(context, NumbersActivity.class);
-        intent.putExtra(NUMBERS_TITLE, title);
+        Intent intent = new Intent(context, SavedOrHistoryActivity.class);
+        intent.putExtra(SAVED_OR_HISTORY_TITLE, title);
         return intent;
     }
 
     @Override
     public Fragment createFragment() {
-        mNumbersView = NumbersFragment.newInstance();
-        return mNumbersView;
+        mSavedOrHistoryView = SavedOrHistoryFragment.newInstance();
+        return mSavedOrHistoryView;
     }
 
     @Override
@@ -33,6 +34,6 @@ public class NumbersActivity extends NavigationDrawerAbstractActivity {
         NumbersRepository numbersRepository = NumbersRepository.getInstance(
                 NumbersRemoteDataSource.getInstance(),
                 NumbersLocalDataSource.getInstance(this, provideSchedulerProvider()));
-        mNumbersPresenter = new NumbersPresenter(numbersRepository, mNumbersView);
+        mSavedOrHistoryPresenter = new SavedOrHistoryPresenter(numbersRepository, mSavedOrHistoryView);
     }
 }
