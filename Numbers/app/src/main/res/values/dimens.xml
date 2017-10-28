@@ -28,5 +28,12 @@
     <dimen name="recycler_view_vertical_margin">16dp</dimen>
     <dimen name="recycler_view_horizontal_margin">16dp</dimen>
     <dimen name="empty_view_padding_top">100dp</dimen>
+    <dimen name="saved_or_history_linear_layout_margin">10dp</dimen>
+    <dimen name="number_value_margin_bottom">4dp</dimen>
+    <dimen name="number_value_text_size">16sp</dimen>
+    <dimen name="number_divider_margin_bottom">10dp</dimen>
+    <dimen name="number_divider_margin_end">10dp</dimen>
+    <dimen name="number_divider_margin_start">10dp</dimen>
+    <dimen name="number_description_margin_bottom">20dp</dimen>
 
 </resources>

@@ -48,7 +48,7 @@ public class NumbersPresenter implements NumbersContract.Presenter {
             setIdAndDateForNumber(mNumberForSave);
             mNumberForSave = null;
         }
-        if (!mNumbersForSave.isEmpty()) {
+        if (mNumbersForSave != null && !mNumbersForSave.isEmpty()) {
             for (Number number : mNumbersForSave) {
                 setIdAndDateForNumber(number);
             }

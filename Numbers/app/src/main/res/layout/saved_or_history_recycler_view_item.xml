@@ -6,7 +6,6 @@
     android:id="@+id/saved_or_history_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/card_view_margin"
     card_view:cardBackgroundColor="@android:color/white"
     card_view:cardCornerRadius="@dimen/card_view_corner_radius"
     card_view:cardElevation="@dimen/card_view_elevation"
@@ -15,6 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/saved_or_history_linear_layout_margin"
         android:orientation="vertical">
 
         <TextView
@@ -22,13 +22,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            tools:text="Number value"/>
+            android:layout_marginBottom="@dimen/number_value_margin_bottom"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/number_value_text_size"
+            tools:text="12"/>
+
+        <View
+            android:id="@+id/number_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spinner_divider_height"
+            android:layout_marginBottom="@dimen/number_divider_margin_bottom"
+            android:layout_marginEnd="@dimen/number_divider_margin_end"
+            android:layout_marginStart="@dimen/number_divider_margin_start"
+            android:background="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/number_description_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/number_description_margin_bottom"
+            android:gravity="center"
             tools:text="Number description value"/>
 
         <TextView
