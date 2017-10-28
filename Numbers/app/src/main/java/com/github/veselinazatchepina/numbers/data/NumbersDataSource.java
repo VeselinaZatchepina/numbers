@@ -11,6 +11,8 @@ public interface NumbersDataSource {
 
     Flowable<Number> getNumberByItsValue(String number, String numberType);
 
+    Flowable<List<Number>> getNumbers();
+
     void saveNumber(Number number);
 
     void deleteNumber();

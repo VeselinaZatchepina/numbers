@@ -40,13 +40,14 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_saved_or_history, container, false);
         unbinder = ButterKnife.bind(this, rootView);
-        defineRecyclerView();
+        mSavedOrHistoryPresenter.getNumbersList();
         return rootView;
     }
 
-    private void defineRecyclerView() {
+    @Override
+    public void showNumbersList(List<Number> numbers) {
         SavedOrHistoryRecyclerViewAdapter savedOrHistoryRecyclerViewAdapter =
-                new SavedOrHistoryRecyclerViewAdapter(mSavedOrHistoryPresenter.getNumbersList());
+                new SavedOrHistoryRecyclerViewAdapter(numbers);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(savedOrHistoryRecyclerViewAdapter);
     }

@@ -78,4 +78,9 @@ public class NumbersRemoteDataSource implements NumbersDataSource {
     public void deleteAllNumbers() {
 
     }
+
+    @Override
+    public Flowable<List<Number>> getNumbers() {
+        return null;
+    }
 }

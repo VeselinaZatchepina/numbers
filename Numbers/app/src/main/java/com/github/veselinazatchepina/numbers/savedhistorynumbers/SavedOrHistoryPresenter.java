@@ -4,10 +4,12 @@ package com.github.veselinazatchepina.numbers.savedhistorynumbers;
 import com.github.veselinazatchepina.numbers.data.Number;
 import com.github.veselinazatchepina.numbers.data.NumbersDataSource;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 public class SavedOrHistoryPresenter implements SavedOrHistoryContract.Presenter {
 
@@ -46,7 +48,25 @@ public class SavedOrHistoryPresenter implements SavedOrHistoryContract.Presenter
     }
 
     @Override
-    public List<Number> getNumbersList() {
-        return new ArrayList<>();
+    public void getNumbersList() {
+        mCompositeDisposable.add(mNumbersRepository.getNumbers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSubscriber<List<Number>>() {
+                    @Override
+                    public void onNext(List<Number> numbers) {
+                        mSavedOrHistoryView.showNumbersList(numbers);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
     }
 }

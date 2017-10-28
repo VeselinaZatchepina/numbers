@@ -22,6 +22,14 @@ public class Number {
 
     private String date;
 
+    public Number(String text, String number, String type, String id, String date) {
+        this.text = text;
+        this.number = number;
+        this.type = type;
+        this.id = id;
+        this.date = date;
+    }
+
     public String getText() {
         return text;
     }
