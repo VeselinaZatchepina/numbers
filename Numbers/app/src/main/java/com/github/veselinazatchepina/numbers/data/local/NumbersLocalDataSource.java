@@ -81,7 +81,7 @@ public class NumbersLocalDataSource implements NumbersDataSource {
 
     @Override
     public void deleteAllNumbers() {
-
+        mDatabaseHelper.delete(NumbersPersistenceContract.NumberEntry.TABLE_NAME, null);
     }
 
     @Override

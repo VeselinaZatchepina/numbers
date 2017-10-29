@@ -11,6 +11,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -45,6 +48,7 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_saved_or_history, container, false);
         unbinder = ButterKnife.bind(this, rootView);
+        setHasOptionsMenu(true);
         mSavedOrHistoryPresenter.getNumbersList();
         return rootView;
     }
@@ -60,6 +64,51 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
     @Override
     public void setPresenter(SavedOrHistoryContract.Presenter presenter) {
         mSavedOrHistoryPresenter = presenter;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.saved_or_history_fragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete_quote:
+                openDeleteAllNumbersDialog();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openDeleteAllNumbersDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View dialogView = layoutInflater.inflate(R.layout.dialog_delete, null);
+        TextView deleteDialogTitle = ButterKnife.findById(dialogView, R.id.dialog_delete_title);
+        deleteDialogTitle.setText(getResources().getString(R.string.dialog_delete_all_number_title));
+        AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getActivity());
+        mDialogBuilder.setView(dialogView);
+        mDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.dialog_ok_button),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                mSavedOrHistoryPresenter.deleteNumbers();
+                            }
+                        })
+                .setNegativeButton(getString(R.string.dialog_cancel_button),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alertDialog = mDialogBuilder.create();
+        alertDialog.show();
+        Button nButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        nButton.setTextColor(getResources().getColor(R.color.colorAccent));
+        Button pButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        pButton.setTextColor(getResources().getColor(R.color.colorAccent));
     }
 
     @Override

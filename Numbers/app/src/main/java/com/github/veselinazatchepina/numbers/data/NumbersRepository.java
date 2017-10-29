@@ -49,7 +49,7 @@ public class NumbersRepository implements NumbersDataSource {
 
     @Override
     public void deleteAllNumbers() {
-
+        mNumbersLocalDataSource.deleteAllNumbers();
     }
 
     @Override

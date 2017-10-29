@@ -21,9 +21,11 @@
 
     <!-- SavedOrHistoryFragment -->
     <string name="description_empty_view">You don\'t have any data</string>
+    <string name="title_delete_all_number">Delete all numbers</string>
 
     <!-- Delete number dialog -->
     <string name="dialog_delete_number_title">Delete current number?</string>
+    <string name="dialog_delete_all_number_title">Delete all numbers?</string>
     <string name="dialog_ok_button">DELETE</string>
     <string name="dialog_cancel_button">CANCEL</string>
     <string name="snack_bar_text">Number is deleted</string>

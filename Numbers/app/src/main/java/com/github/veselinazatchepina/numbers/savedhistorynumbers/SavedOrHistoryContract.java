@@ -17,7 +17,7 @@ public interface SavedOrHistoryContract {
 
         void deleteNumber(Number number);
 
-        void deleteNumbers(Number number);
+        void deleteNumbers();
 
         void getNumbersList();
     }

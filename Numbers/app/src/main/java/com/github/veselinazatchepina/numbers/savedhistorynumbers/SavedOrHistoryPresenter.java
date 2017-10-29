@@ -43,8 +43,8 @@ public class SavedOrHistoryPresenter implements SavedOrHistoryContract.Presenter
     }
 
     @Override
-    public void deleteNumbers(Number number) {
-
+    public void deleteNumbers() {
+        mNumbersRepository.deleteAllNumbers();
     }
 
     @Override
