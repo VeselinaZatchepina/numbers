@@ -36,4 +36,7 @@
     <dimen name="number_divider_margin_start">10dp</dimen>
     <dimen name="number_description_margin_bottom">20dp</dimen>
 
+    <!-- Delete current number dialog -->
+    <dimen name="delete_number_dialog_title_margin">24dp</dimen>
+
 </resources>

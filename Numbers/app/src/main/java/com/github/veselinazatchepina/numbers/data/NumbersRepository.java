@@ -43,8 +43,8 @@ public class NumbersRepository implements NumbersDataSource {
     }
 
     @Override
-    public void deleteNumber() {
-
+    public void deleteNumber(Number number) {
+        mNumbersLocalDataSource.deleteNumber(number);
     }
 
     @Override

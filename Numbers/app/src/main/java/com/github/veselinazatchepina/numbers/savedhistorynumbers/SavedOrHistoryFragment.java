@@ -1,14 +1,19 @@
 package com.github.veselinazatchepina.numbers.savedhistorynumbers;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.veselinazatchepina.numbers.R;
@@ -95,6 +100,7 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                 holder.mNumberValue.setText(currentNumber.getNumber());
                 holder.mNumberDescriptionValue.setText(currentNumber.getText());
                 holder.mQueryDateValue.setText(currentNumber.getDate());
+                holder.mCurrentNumber = currentNumber;
             }
         }
 
@@ -112,6 +118,7 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+            Number mCurrentNumber;
             @Nullable
             @BindView(R.id.number_value)
             TextView mNumberValue;
@@ -130,11 +137,11 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
 
             @Override
             public boolean onLongClick(View view) {
-                //openDeleteBookCategoryDialog();
+                openDeleteNumberDialog();
                 return false;
             }
 
-            /*private void openDeleteBookCategoryDialog() {
+            private void openDeleteNumberDialog() {
                 LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
                 View dialogView = layoutInflater.inflate(R.layout.dialog_delete, null);
                 AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getActivity());
@@ -144,7 +151,7 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                         .setPositiveButton(getString(R.string.dialog_ok_button),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        mBooksRealmRepository.deleteAllBooksWithCurrentCategory(mCategoryForDelete);
+                                        mSavedOrHistoryPresenter.deleteNumber(mCurrentNumber);
                                         showSnackbar();
                                     }
                                 })
@@ -157,17 +164,18 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                 AlertDialog alertDialog = mDialogBuilder.create();
                 alertDialog.show();
                 Button nButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-                nButton.setTextColor(getResources().getColor(R.color.book_accent_background));
+                nButton.setTextColor(getResources().getColor(R.color.colorAccent));
                 Button pButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                pButton.setTextColor(getResources().getColor(R.color.book_accent_background));
-            }*/
+                pButton.setTextColor(getResources().getColor(R.color.colorAccent));
+            }
 
-            /*private void showSnackbar() {
+            private void showSnackbar() {
                 final CoordinatorLayout coordinatorLayout = ButterKnife.findById(getActivity(), R.id.coordinator_layout);
-                Snackbar snackbarIsDeleted = Snackbar.make(coordinatorLayout, getString(R.string.book_category) +
-                        mCategoryForDelete + getString(R.string.is_deleted), Snackbar.LENGTH_LONG);
+                Snackbar snackbarIsDeleted = Snackbar.make(coordinatorLayout,
+                        getString(R.string.snack_bar_text),
+                        Snackbar.LENGTH_LONG);
                 snackbarIsDeleted.show();
-            }*/
+            }
         }
     }
 }

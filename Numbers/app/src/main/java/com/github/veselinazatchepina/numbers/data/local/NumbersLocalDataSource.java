@@ -73,8 +73,10 @@ public class NumbersLocalDataSource implements NumbersDataSource {
     }
 
     @Override
-    public void deleteNumber() {
-
+    public void deleteNumber(Number number) {
+        String selection = NumbersPersistenceContract.NumberEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?";
+        String[] selectionArgs = {number.getId()};
+        mDatabaseHelper.delete(NumbersPersistenceContract.NumberEntry.TABLE_NAME, selection, selectionArgs);
     }
 
     @Override

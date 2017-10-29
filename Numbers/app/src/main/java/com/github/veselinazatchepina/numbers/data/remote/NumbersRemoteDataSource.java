@@ -70,7 +70,7 @@ public class NumbersRemoteDataSource implements NumbersDataSource {
     }
 
     @Override
-    public void deleteNumber() {
+    public void deleteNumber(Number number) {
 
     }
 

@@ -15,7 +15,7 @@ public interface NumbersDataSource {
 
     void saveNumber(Number number);
 
-    void deleteNumber();
+    void deleteNumber(Number number);
 
     void deleteAllNumbers();
 }
