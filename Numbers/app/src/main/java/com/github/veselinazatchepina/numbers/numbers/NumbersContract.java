@@ -15,7 +15,7 @@ public interface NumbersContract {
 
     interface Presenter extends BasePresenter {
 
-        void saveNumber();
+        void saveUserNumber();
 
         void getNumberDescription(String number, String queryType);
 

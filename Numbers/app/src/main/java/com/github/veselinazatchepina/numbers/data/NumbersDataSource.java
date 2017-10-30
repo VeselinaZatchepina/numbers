@@ -13,7 +13,9 @@ public interface NumbersDataSource {
 
     Flowable<List<Number>> getNumbers();
 
-    void saveNumber(Number number);
+    void saveHistoryNumber(Number number);
+
+    void saveUserNumber(Number number);
 
     void deleteNumber(Number number);
 

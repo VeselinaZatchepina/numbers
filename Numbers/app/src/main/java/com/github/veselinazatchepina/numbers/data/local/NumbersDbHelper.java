@@ -15,13 +15,22 @@ public class NumbersDbHelper extends SQLiteOpenHelper {
 
     private static final String COMMA_SEP = ",";
 
-    private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + NumbersPersistenceContract.NumberEntry.TABLE_NAME + " (" +
-                    NumbersPersistenceContract.NumberEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + " PRIMARY KEY," +
-                    NumbersPersistenceContract.NumberEntry.COLUMN_NAME_NUMBER + TEXT_TYPE + COMMA_SEP +
-                    NumbersPersistenceContract.NumberEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
-                    NumbersPersistenceContract.NumberEntry.COLUMN_NAME_TYPE + TEXT_TYPE + COMMA_SEP +
-                    NumbersPersistenceContract.NumberEntry.COLUMN_NAME_DATE + TEXT_TYPE +
+    private static final String SQL_CREATE_ENTRIES_HISTORY =
+            "CREATE TABLE " + HistoryNumbersPersistenceContract.NumberEntry.TABLE_NAME + " (" +
+                    HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + " PRIMARY KEY," +
+                    HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_NUMBER + TEXT_TYPE + COMMA_SEP +
+                    HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
+                    HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_TYPE + TEXT_TYPE + COMMA_SEP +
+                    HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_DATE + TEXT_TYPE +
+                    " )";
+
+    private static final String SQL_CREATE_ENTRIES_USER =
+            "CREATE TABLE " + UserNumbersPersistenceContract.NumberEntry.TABLE_NAME + " (" +
+                    UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + " PRIMARY KEY," +
+                    UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_NUMBER + TEXT_TYPE + COMMA_SEP +
+                    UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
+                    UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_TYPE + TEXT_TYPE + COMMA_SEP +
+                    UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_DATE + TEXT_TYPE +
                     " )";
 
     public NumbersDbHelper(Context context) {
@@ -29,7 +38,8 @@ public class NumbersDbHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_ENTRIES);
+        db.execSQL(SQL_CREATE_ENTRIES_HISTORY);
+        db.execSQL(SQL_CREATE_ENTRIES_USER);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

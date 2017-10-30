@@ -123,7 +123,7 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
     }
 
     private void defineActionWhenFabIsPressed() {
-        mPresenter.saveNumber();
+        mPresenter.saveUserNumber();
     }
 
     private void defineQueryTypeSpinner() {

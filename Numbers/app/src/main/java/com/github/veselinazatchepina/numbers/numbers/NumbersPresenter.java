@@ -43,14 +43,16 @@ public class NumbersPresenter implements NumbersContract.Presenter {
     }
 
     @Override
-    public void saveNumber() {
+    public void saveUserNumber() {
         if (mNumberForSave != null) {
             setIdAndDateForNumber(mNumberForSave);
+            mNumbersRepository.saveUserNumber(mNumberForSave);
             mNumberForSave = null;
         }
         if (mNumbersForSave != null && !mNumbersForSave.isEmpty()) {
             for (Number number : mNumbersForSave) {
                 setIdAndDateForNumber(number);
+                mNumbersRepository.saveUserNumber(number);
             }
             mNumbersForSave = null;
         }
@@ -59,7 +61,6 @@ public class NumbersPresenter implements NumbersContract.Presenter {
     private void setIdAndDateForNumber(Number number) {
         number.setId(UUID.randomUUID().toString());
         number.setDate(getCurrentDate());
-        mNumbersRepository.saveNumber(number);
     }
 
     private String getCurrentDate() {
@@ -85,6 +86,10 @@ public class NumbersPresenter implements NumbersContract.Presenter {
                     public void onNext(List<Number> numbers) {
                         mNumbersView.setNumberDescription(createDescriptionFromNumbersList(numbers));
                         mNumbersForSave = numbers;
+                        for (Number number : numbers) {
+                            setIdAndDateForNumber(number);
+                            mNumbersRepository.saveHistoryNumber(number);
+                        }
                     }
 
                     @Override
@@ -108,6 +113,8 @@ public class NumbersPresenter implements NumbersContract.Presenter {
                     public void onNext(Number number) {
                         mNumbersView.setNumberDescription(number.getText());
                         mNumberForSave = number;
+                        setIdAndDateForNumber(number);
+                        mNumbersRepository.saveHistoryNumber(number);
                     }
 
                     @Override

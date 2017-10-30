@@ -65,7 +65,7 @@ public class NumbersRemoteDataSource implements NumbersDataSource {
     }
 
     @Override
-    public void saveNumber(Number number) {
+    public void saveHistoryNumber(Number number) {
 
     }
 
@@ -82,5 +82,10 @@ public class NumbersRemoteDataSource implements NumbersDataSource {
     @Override
     public Flowable<List<Number>> getNumbers() {
         return null;
+    }
+
+    @Override
+    public void saveUserNumber(Number number) {
+
     }
 }

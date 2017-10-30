@@ -38,8 +38,13 @@ public class NumbersRepository implements NumbersDataSource {
     }
 
     @Override
-    public void saveNumber(Number number) {
-        mNumbersLocalDataSource.saveNumber(number);
+    public void saveHistoryNumber(Number number) {
+        mNumbersLocalDataSource.saveHistoryNumber(number);
+    }
+
+    @Override
+    public void saveUserNumber(Number number) {
+        mNumbersLocalDataSource.saveUserNumber(number);
     }
 
     @Override
