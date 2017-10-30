@@ -36,6 +36,8 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
     private Unbinder unbinder;
 
     private SavedOrHistoryContract.Presenter mSavedOrHistoryPresenter;
+    private CharSequence mTitle;
+    private NumbersListType mNumbersListType;
 
     public SavedOrHistoryFragment() {
     }
@@ -51,14 +53,16 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
         unbinder = ButterKnife.bind(this, rootView);
         setHasOptionsMenu(true);
         defineTypeOfNumbersList();
+        mSavedOrHistoryPresenter.getNumbersList(mNumbersListType);
         return rootView;
     }
 
     private void defineTypeOfNumbersList() {
-        if (getActivity().getTitle().equals(getString(R.string.menu_history))) {
-            mSavedOrHistoryPresenter.getNumbersList(NumbersListType.HISTORY);
+        mTitle = getActivity().getTitle();
+        if (mTitle.equals(getString(R.string.menu_history))) {
+            mNumbersListType = NumbersListType.HISTORY;
         } else {
-            mSavedOrHistoryPresenter.getNumbersList(NumbersListType.USER);
+            mNumbersListType = NumbersListType.USER;
         }
     }
 
@@ -103,11 +107,7 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                 .setPositiveButton(getString(R.string.dialog_ok_button),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                if (getActivity().getTitle().equals(getString(R.string.menu_history))) {
-                                    mSavedOrHistoryPresenter.deleteNumbers(NumbersListType.HISTORY);
-                                } else {
-                                    mSavedOrHistoryPresenter.deleteNumbers(NumbersListType.USER);
-                                }
+                                mSavedOrHistoryPresenter.deleteNumbers(mNumbersListType);
                             }
                         })
                 .setNegativeButton(getString(R.string.dialog_cancel_button),
@@ -122,6 +122,24 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
         nButton.setTextColor(getResources().getColor(R.color.colorAccent));
         Button pButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
         pButton.setTextColor(getResources().getColor(R.color.colorAccent));
+    }
+
+    @Override
+    public void showSnackBarDeletedNumber() {
+        createSnackBar(getString(R.string.snack_bar_delete_number_text));
+    }
+
+    @Override
+    public void showSnackBarDeletedAllNumbers() {
+        createSnackBar(getString(R.string.snack_bar_delete_all_numbers_text));
+    }
+
+    private void createSnackBar(String text) {
+        final CoordinatorLayout coordinatorLayout = ButterKnife.findById(getActivity(), R.id.coordinator_layout);
+        Snackbar snackbarIsDeleted = Snackbar.make(coordinatorLayout,
+                text,
+                Snackbar.LENGTH_LONG);
+        snackbarIsDeleted.show();
     }
 
     @Override
@@ -213,12 +231,7 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                         .setPositiveButton(getString(R.string.dialog_ok_button),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        if (getActivity().getTitle().equals(getString(R.string.menu_history))) {
-                                            mSavedOrHistoryPresenter.deleteNumber(mCurrentNumber, NumbersListType.HISTORY);
-                                        } else {
-                                            mSavedOrHistoryPresenter.deleteNumber(mCurrentNumber, NumbersListType.USER);
-                                        }
-                                        showSnackbar();
+                                        mSavedOrHistoryPresenter.deleteNumber(mCurrentNumber, mNumbersListType);
                                     }
                                 })
                         .setNegativeButton(getString(R.string.dialog_cancel_button),
@@ -233,14 +246,6 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                 nButton.setTextColor(getResources().getColor(R.color.colorAccent));
                 Button pButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
                 pButton.setTextColor(getResources().getColor(R.color.colorAccent));
-            }
-
-            private void showSnackbar() {
-                final CoordinatorLayout coordinatorLayout = ButterKnife.findById(getActivity(), R.id.coordinator_layout);
-                Snackbar snackbarIsDeleted = Snackbar.make(coordinatorLayout,
-                        getString(R.string.snack_bar_text),
-                        Snackbar.LENGTH_LONG);
-                snackbarIsDeleted.show();
             }
         }
     }

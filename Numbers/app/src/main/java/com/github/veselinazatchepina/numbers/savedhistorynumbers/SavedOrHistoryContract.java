@@ -12,6 +12,10 @@ public interface SavedOrHistoryContract {
 
     interface View extends BaseView<Presenter> {
         void showNumbersList(List<Number> numbers);
+
+        void showSnackBarDeletedNumber();
+
+        void showSnackBarDeletedAllNumbers();
     }
 
     interface Presenter extends BasePresenter {

@@ -1,8 +1,6 @@
 package com.github.veselinazatchepina.numbers.data;
 
 
-import com.github.veselinazatchepina.numbers.enums.NumbersListType;
-
 import java.util.List;
 
 import io.reactivex.Flowable;
@@ -16,7 +14,7 @@ public class NumbersRepository implements NumbersDataSource {
     private final NumbersDataSource mNumbersLocalDataSource;
 
     public static NumbersRepository getInstance(NumbersDataSource numbersRemoteDataSource,
-                                              NumbersDataSource numbersLocalDataSource) {
+                                                NumbersDataSource numbersLocalDataSource) {
         if (INSTANCE == null) {
             INSTANCE = new NumbersRepository(numbersRemoteDataSource, numbersLocalDataSource);
         }
@@ -24,7 +22,7 @@ public class NumbersRepository implements NumbersDataSource {
     }
 
     private NumbersRepository(NumbersDataSource numbersRemoteDataSource,
-                            NumbersDataSource numbersLocalDataSource) {
+                              NumbersDataSource numbersLocalDataSource) {
         mNumbersRemoteDataSource = numbersRemoteDataSource;
         mNumbersLocalDataSource = numbersLocalDataSource;
     }
@@ -50,17 +48,32 @@ public class NumbersRepository implements NumbersDataSource {
     }
 
     @Override
-    public void deleteNumber(Number number, NumbersListType type) {
-        mNumbersLocalDataSource.deleteNumber(number, type);
+    public void deleteUserNumber(Number number) {
+        mNumbersLocalDataSource.deleteUserNumber(number);
     }
 
     @Override
-    public void deleteAllNumbers(NumbersListType type) {
-        mNumbersLocalDataSource.deleteAllNumbers(type);
+    public void deleteHistoryNumber(Number number) {
+        mNumbersLocalDataSource.deleteHistoryNumber(number);
     }
 
     @Override
-    public Flowable<List<Number>> getNumbers(NumbersListType type) {
-        return mNumbersLocalDataSource.getNumbers(type);
+    public void deleteAllUserNumbers() {
+        mNumbersLocalDataSource.deleteAllUserNumbers();
+    }
+
+    @Override
+    public void deleteAllHistoryNumbers() {
+        mNumbersLocalDataSource.deleteAllHistoryNumbers();
+    }
+
+    @Override
+    public Flowable<List<Number>> getUserNumbers() {
+        return mNumbersLocalDataSource.getUserNumbers();
+    }
+
+    @Override
+    public Flowable<List<Number>> getHistoryNumbers() {
+        return mNumbersLocalDataSource.getHistoryNumbers();
     }
 }

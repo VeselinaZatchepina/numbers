@@ -101,7 +101,8 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
         Intent intent = null;
         switch (item.getItemId()) {
             case R.id.menu_numbers:
-                intent = NumbersActivity.newIntent(this, getString(R.string.numbers_activity_title));;
+                intent = NumbersActivity.newIntent(this, getString(R.string.numbers_activity_title));
+                ;
                 break;
             case R.id.menu_saved_numbers:
                 intent = SavedOrHistoryActivity.newIntent(this, getString(R.string.saved_numbers_activity_title));

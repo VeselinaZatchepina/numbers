@@ -44,11 +44,19 @@ public class NumbersPresenter implements NumbersContract.Presenter {
 
     @Override
     public void saveUserNumber() {
+        saveNumber();
+        saveNumbersList();
+    }
+
+    private void saveNumber() {
         if (mNumberForSave != null) {
             setIdAndDateForNumber(mNumberForSave);
             mNumbersRepository.saveUserNumber(mNumberForSave);
             mNumberForSave = null;
         }
+    }
+
+    private void saveNumbersList() {
         if (mNumbersForSave != null && !mNumbersForSave.isEmpty()) {
             for (Number number : mNumbersForSave) {
                 setIdAndDateForNumber(number);

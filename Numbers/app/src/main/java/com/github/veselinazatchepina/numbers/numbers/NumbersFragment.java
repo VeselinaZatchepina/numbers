@@ -61,16 +61,6 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
         return rootView;
     }
 
-    private void defineSubmitButton() {
-        mSubmitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.getNumberDescription(mNumberValue.getText().toString(),
-                        mSpinner.getSelectedItem().toString());
-            }
-        });
-    }
-
     private void defineEditText() {
         mNumberValue.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,7 +70,7 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    mPresenter.defineSpinnerPosition(charSequence);
+                mPresenter.defineSpinnerPosition(charSequence);
             }
 
             @Override
@@ -90,14 +80,35 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
         });
     }
 
-    @Override
-    public void setPresenter(NumbersContract.Presenter presenter) {
-        mPresenter = presenter;
+    private void defineQueryTypeSpinner() {
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item);
+        spinnerArrayAdapter.addAll(getResources().getStringArray(R.array.query_types));
+        mSpinner.setAdapter(spinnerArrayAdapter);
     }
 
-    @Override
-    public void setNumberDescription(String description) {
-        mDescription.setText(description);
+    private void defineSpinnerListener() {
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                mPresenter.defineSpinnerPosition(mNumberValue.getText().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void defineSubmitButton() {
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.getNumberDescription(mNumberValue.getText().toString(),
+                        mSpinner.getSelectedItem().toString());
+            }
+        });
     }
 
     private void defineFab() {
@@ -126,25 +137,14 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
         mPresenter.saveUserNumber();
     }
 
-    private void defineQueryTypeSpinner() {
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_dropdown_item);
-        spinnerArrayAdapter.addAll(getResources().getStringArray(R.array.query_types));
-        mSpinner.setAdapter(spinnerArrayAdapter);
+    @Override
+    public void setPresenter(NumbersContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 
-    private void defineSpinnerListener() {
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                mPresenter.defineSpinnerPosition(mNumberValue.getText().toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+    @Override
+    public void setNumberDescription(String description) {
+        mDescription.setText(description);
     }
 
     @Override

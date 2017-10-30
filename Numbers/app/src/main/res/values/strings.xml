@@ -28,6 +28,7 @@
     <string name="dialog_delete_all_number_title">Delete all numbers?</string>
     <string name="dialog_ok_button">DELETE</string>
     <string name="dialog_cancel_button">CANCEL</string>
-    <string name="snack_bar_text">Number is deleted</string>
+    <string name="snack_bar_delete_number_text">Number is deleted</string>
+    <string name="snack_bar_delete_all_numbers_text">Numbers is deleted</string>
 
 </resources>
