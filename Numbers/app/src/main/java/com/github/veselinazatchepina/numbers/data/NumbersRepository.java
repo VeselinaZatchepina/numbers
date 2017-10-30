@@ -1,6 +1,8 @@
 package com.github.veselinazatchepina.numbers.data;
 
 
+import com.github.veselinazatchepina.numbers.enums.NumbersListType;
+
 import java.util.List;
 
 import io.reactivex.Flowable;
@@ -48,17 +50,17 @@ public class NumbersRepository implements NumbersDataSource {
     }
 
     @Override
-    public void deleteNumber(Number number) {
-        mNumbersLocalDataSource.deleteNumber(number);
+    public void deleteNumber(Number number, NumbersListType type) {
+        mNumbersLocalDataSource.deleteNumber(number, type);
     }
 
     @Override
-    public void deleteAllNumbers() {
-        mNumbersLocalDataSource.deleteAllNumbers();
+    public void deleteAllNumbers(NumbersListType type) {
+        mNumbersLocalDataSource.deleteAllNumbers(type);
     }
 
     @Override
-    public Flowable<List<Number>> getNumbers() {
-        return mNumbersLocalDataSource.getNumbers();
+    public Flowable<List<Number>> getNumbers(NumbersListType type) {
+        return mNumbersLocalDataSource.getNumbers(type);
     }
 }

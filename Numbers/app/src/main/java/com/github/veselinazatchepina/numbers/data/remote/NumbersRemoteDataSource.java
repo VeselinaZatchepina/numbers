@@ -2,6 +2,7 @@ package com.github.veselinazatchepina.numbers.data.remote;
 
 import com.github.veselinazatchepina.numbers.data.Number;
 import com.github.veselinazatchepina.numbers.data.NumbersDataSource;
+import com.github.veselinazatchepina.numbers.enums.NumbersListType;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.List;
@@ -70,17 +71,17 @@ public class NumbersRemoteDataSource implements NumbersDataSource {
     }
 
     @Override
-    public void deleteNumber(Number number) {
+    public void deleteNumber(Number number, NumbersListType type) {
 
     }
 
     @Override
-    public void deleteAllNumbers() {
+    public void deleteAllNumbers(NumbersListType type) {
 
     }
 
     @Override
-    public Flowable<List<Number>> getNumbers() {
+    public Flowable<List<Number>> getNumbers(NumbersListType type) {
         return null;
     }
 

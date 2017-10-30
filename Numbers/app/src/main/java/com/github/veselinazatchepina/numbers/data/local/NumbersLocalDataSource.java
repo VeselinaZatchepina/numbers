@@ -9,6 +9,7 @@ import android.text.TextUtils;
 
 import com.github.veselinazatchepina.numbers.data.Number;
 import com.github.veselinazatchepina.numbers.data.NumbersDataSource;
+import com.github.veselinazatchepina.numbers.enums.NumbersListType;
 import com.github.veselinazatchepina.numbers.utils.BaseSchedulerProvider;
 import com.squareup.sqlbrite2.BriteDatabase;
 import com.squareup.sqlbrite2.SqlBrite;
@@ -97,19 +98,55 @@ public class NumbersLocalDataSource implements NumbersDataSource {
     }
 
     @Override
-    public void deleteNumber(Number number) {
-        String selection = HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?";
-        String[] selectionArgs = {number.getId()};
-        mDatabaseHelper.delete(HistoryNumbersPersistenceContract.NumberEntry.TABLE_NAME, selection, selectionArgs);
+    public void deleteNumber(Number number, NumbersListType type) {
+        if (type.equals(NumbersListType.HISTORY)) {
+            String selection = HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?";
+            String[] selectionArgs = {number.getId()};
+            mDatabaseHelper.delete(HistoryNumbersPersistenceContract.NumberEntry.TABLE_NAME, selection, selectionArgs);
+        } else {
+            String selection = UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?";
+            String[] selectionArgs = {number.getId()};
+            mDatabaseHelper.delete(UserNumbersPersistenceContract.NumberEntry.TABLE_NAME, selection, selectionArgs);
+        }
     }
 
     @Override
-    public void deleteAllNumbers() {
-        mDatabaseHelper.delete(HistoryNumbersPersistenceContract.NumberEntry.TABLE_NAME, null);
+    public void deleteAllNumbers(NumbersListType type) {
+        if (type.equals(NumbersListType.HISTORY)) {
+            mDatabaseHelper.delete(HistoryNumbersPersistenceContract.NumberEntry.TABLE_NAME, null);
+        } else {
+            mDatabaseHelper.delete(UserNumbersPersistenceContract.NumberEntry.TABLE_NAME, null);
+        }
     }
 
     @Override
-    public Flowable<List<Number>> getNumbers() {
+    public Flowable<List<Number>> getNumbers(NumbersListType type) {
+        if (type.equals(NumbersListType.HISTORY)) {
+            return mDatabaseHelper.createQuery(HistoryNumbersPersistenceContract.NumberEntry.TABLE_NAME,
+                    createHistoryProjection())
+                    .mapToList(mNumberMapperFunction)
+                    .toFlowable(BackpressureStrategy.BUFFER);
+        } else {
+            return mDatabaseHelper.createQuery(UserNumbersPersistenceContract.NumberEntry.TABLE_NAME,
+                    createUserProjection())
+                    .mapToList(mNumberMapperFunction)
+                    .toFlowable(BackpressureStrategy.BUFFER);
+        }
+    }
+
+    private String createUserProjection() {
+        String[] projection = {
+                UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_ENTRY_ID,
+                UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_NUMBER,
+                UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_TYPE,
+                UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_DESCRIPTION,
+                UserNumbersPersistenceContract.NumberEntry.COLUMN_NAME_DATE
+        };
+        return String.format("SELECT %s FROM %s", TextUtils.join(",", projection),
+                UserNumbersPersistenceContract.NumberEntry.TABLE_NAME);
+    }
+
+    private String createHistoryProjection() {
         String[] projection = {
                 HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_ENTRY_ID,
                 HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_NUMBER,
@@ -117,10 +154,7 @@ public class NumbersLocalDataSource implements NumbersDataSource {
                 HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_DESCRIPTION,
                 HistoryNumbersPersistenceContract.NumberEntry.COLUMN_NAME_DATE
         };
-        String sql = String.format("SELECT %s FROM %s", TextUtils.join(",", projection),
+        return String.format("SELECT %s FROM %s", TextUtils.join(",", projection),
                 HistoryNumbersPersistenceContract.NumberEntry.TABLE_NAME);
-        return mDatabaseHelper.createQuery(HistoryNumbersPersistenceContract.NumberEntry.TABLE_NAME, sql)
-                .mapToList(mNumberMapperFunction)
-                .toFlowable(BackpressureStrategy.BUFFER);
     }
 }

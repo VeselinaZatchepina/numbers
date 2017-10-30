@@ -41,6 +41,7 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
         setContentView(R.layout.activity_navigation_drawer);
         ButterKnife.bind(this);
         defineNavigationDrawer();
+        defineTitle();
         defineFragment();
         createPresenter();
     }
@@ -60,6 +61,10 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
         s.setSpan(new TextAppearanceSpan(this, R.style.NavigationViewStyle), 0, s.length(), 0);
         tools.setTitle(s);
         mNavigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void defineTitle() {
+
     }
 
     private void defineFragment() {

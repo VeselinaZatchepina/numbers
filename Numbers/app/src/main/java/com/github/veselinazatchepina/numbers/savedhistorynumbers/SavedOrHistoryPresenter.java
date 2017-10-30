@@ -3,6 +3,7 @@ package com.github.veselinazatchepina.numbers.savedhistorynumbers;
 
 import com.github.veselinazatchepina.numbers.data.Number;
 import com.github.veselinazatchepina.numbers.data.NumbersDataSource;
+import com.github.veselinazatchepina.numbers.enums.NumbersListType;
 
 import java.util.List;
 
@@ -38,18 +39,18 @@ public class SavedOrHistoryPresenter implements SavedOrHistoryContract.Presenter
     }
 
     @Override
-    public void deleteNumber(Number number) {
-        mNumbersRepository.deleteNumber(number);
+    public void deleteNumber(Number number, NumbersListType type) {
+        mNumbersRepository.deleteNumber(number, type);
     }
 
     @Override
-    public void deleteNumbers() {
-        mNumbersRepository.deleteAllNumbers();
+    public void deleteNumbers(NumbersListType type) {
+        mNumbersRepository.deleteAllNumbers(type);
     }
 
     @Override
-    public void getNumbersList() {
-        mCompositeDisposable.add(mNumbersRepository.getNumbers()
+    public void getNumbersList(NumbersListType type) {
+        mCompositeDisposable.add(mNumbersRepository.getNumbers(type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSubscriber<List<Number>>() {

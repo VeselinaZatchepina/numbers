@@ -24,6 +24,15 @@ public class SavedOrHistoryActivity extends NavigationDrawerAbstractActivity {
     }
 
     @Override
+    public void defineTitle() {
+        super.defineTitle();
+        String title = getIntent().getStringExtra(SAVED_OR_HISTORY_TITLE);
+        if (title != null) {
+            setTitle(title);
+        }
+    }
+
+    @Override
     public Fragment createFragment() {
         mSavedOrHistoryView = SavedOrHistoryFragment.newInstance();
         return mSavedOrHistoryView;

@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.github.veselinazatchepina.numbers.R;
 import com.github.veselinazatchepina.numbers.data.Number;
+import com.github.veselinazatchepina.numbers.enums.NumbersListType;
 
 import java.util.List;
 
@@ -49,8 +50,16 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
         View rootView = inflater.inflate(R.layout.fragment_saved_or_history, container, false);
         unbinder = ButterKnife.bind(this, rootView);
         setHasOptionsMenu(true);
-        mSavedOrHistoryPresenter.getNumbersList();
+        defineTypeOfNumbersList();
         return rootView;
+    }
+
+    private void defineTypeOfNumbersList() {
+        if (getActivity().getTitle().equals(getString(R.string.menu_history))) {
+            mSavedOrHistoryPresenter.getNumbersList(NumbersListType.HISTORY);
+        } else {
+            mSavedOrHistoryPresenter.getNumbersList(NumbersListType.USER);
+        }
     }
 
     @Override
@@ -94,7 +103,11 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                 .setPositiveButton(getString(R.string.dialog_ok_button),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                mSavedOrHistoryPresenter.deleteNumbers();
+                                if (getActivity().getTitle().equals(getString(R.string.menu_history))) {
+                                    mSavedOrHistoryPresenter.deleteNumbers(NumbersListType.HISTORY);
+                                } else {
+                                    mSavedOrHistoryPresenter.deleteNumbers(NumbersListType.USER);
+                                }
                             }
                         })
                 .setNegativeButton(getString(R.string.dialog_cancel_button),
@@ -200,7 +213,11 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                         .setPositiveButton(getString(R.string.dialog_ok_button),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        mSavedOrHistoryPresenter.deleteNumber(mCurrentNumber);
+                                        if (getActivity().getTitle().equals(getString(R.string.menu_history))) {
+                                            mSavedOrHistoryPresenter.deleteNumber(mCurrentNumber, NumbersListType.HISTORY);
+                                        } else {
+                                            mSavedOrHistoryPresenter.deleteNumber(mCurrentNumber, NumbersListType.USER);
+                                        }
                                         showSnackbar();
                                     }
                                 })
