@@ -22,6 +22,9 @@
     <!-- SavedOrHistoryFragment -->
     <string name="description_empty_view">You don\'t have any data</string>
     <string name="title_delete_all_number">Delete all numbers</string>
+    <string name="title_delete_number">Delete number</string>
+    <string name="title_share_number">Share number</string>
+    <string name="current_number_share_intent_theme">It is interesting fact!</string>
 
     <!-- Delete number dialog -->
     <string name="dialog_delete_number_title">Delete current number?</string>

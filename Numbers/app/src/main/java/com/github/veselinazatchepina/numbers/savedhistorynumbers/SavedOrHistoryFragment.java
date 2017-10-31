@@ -2,14 +2,18 @@ package com.github.veselinazatchepina.numbers.savedhistorynumbers;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -88,7 +92,7 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.delete_quote:
+            case R.id.delete_number:
                 openDeleteAllNumbersDialog();
                 break;
         }
@@ -217,8 +221,40 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
 
             @Override
             public boolean onLongClick(View view) {
-                openDeleteNumberDialog();
+                openPopupMenu(view);
                 return false;
+            }
+
+            private void openPopupMenu(View view) {
+                PopupMenu popup = new PopupMenu(getActivity(), view);
+                popup.getMenuInflater().inflate(R.menu.share_delete_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.share_number:
+                                setShareAction(item);
+                                break;
+                            case R.id.delete_number:
+                                openDeleteNumberDialog();
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                popup.show();
+            }
+
+            private void setShareAction(MenuItem item) {
+                ShareActionProvider shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+                Intent mSharingIntent = new Intent(Intent.ACTION_SEND);
+                mSharingIntent.setType("text/plain");
+                String numberTextForShareBody = mCurrentNumber.getText();
+                mSharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.current_number_share_intent_theme));
+                mSharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, numberTextForShareBody);
+                if (shareActionProvider != null) {
+                    shareActionProvider.setShareIntent(mSharingIntent);
+                }
+
             }
 
             private void openDeleteNumberDialog() {
