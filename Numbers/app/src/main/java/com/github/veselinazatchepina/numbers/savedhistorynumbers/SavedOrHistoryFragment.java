@@ -8,12 +8,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +40,7 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
     private SavedOrHistoryContract.Presenter mSavedOrHistoryPresenter;
     private CharSequence mTitle;
     private NumbersListType mNumbersListType;
+    private Intent mSharingIntent;
 
     public SavedOrHistoryFragment() {
     }
@@ -232,7 +231,8 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.share_number:
-                                setShareAction(item);
+                                defineShareIntent();
+                                startActivity(Intent.createChooser(mSharingIntent, getString(R.string.share_chooser_title)));
                                 break;
                             case R.id.delete_number:
                                 openDeleteNumberDialog();
@@ -244,16 +244,12 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                 popup.show();
             }
 
-            private void setShareAction(MenuItem item) {
-                ShareActionProvider shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-                Intent mSharingIntent = new Intent(Intent.ACTION_SEND);
+            private void defineShareIntent() {
+                mSharingIntent = new Intent(Intent.ACTION_SEND);
                 mSharingIntent.setType("text/plain");
-                String numberTextForShareBody = mCurrentNumber.getText();
+                String quoteTextForShareBody = "\"" + mCurrentNumber.getText() + "\"";
                 mSharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.current_number_share_intent_theme));
-                mSharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, numberTextForShareBody);
-                if (shareActionProvider != null) {
-                    shareActionProvider.setShareIntent(mSharingIntent);
-                }
+                mSharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, quoteTextForShareBody);
             }
 
             private void openDeleteNumberDialog() {

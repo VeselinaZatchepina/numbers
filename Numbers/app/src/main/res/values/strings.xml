@@ -19,6 +19,7 @@
     <string name="button_text">Submit</string>
     <string name="empty_description_text">No description</string>
     <string name="input_error">Input is not correct</string>
+    <string name="share">Share</string>
 
     <!-- SavedOrHistoryFragment -->
     <string name="description_empty_view">You don\'t have any data</string>
@@ -26,6 +27,7 @@
     <string name="title_delete_number">Delete number</string>
     <string name="title_share_number">Share number</string>
     <string name="current_number_share_intent_theme">It is interesting fact!</string>
+    <string name="share_chooser_title">Choose application</string>
 
     <!-- Delete number dialog -->
     <string name="dialog_delete_number_title">Delete current number?</string>

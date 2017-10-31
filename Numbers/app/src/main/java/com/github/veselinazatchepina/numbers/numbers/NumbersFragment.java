@@ -1,6 +1,7 @@
 package com.github.veselinazatchepina.numbers.numbers;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,9 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -41,6 +45,7 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
 
     private NumbersContract.Presenter mPresenter;
     int mFabImageResourceId = setFabImageResourceId();
+    private Intent mSharingIntent;
 
     public NumbersFragment() {
     }
@@ -54,6 +59,7 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_numbers, container, false);
         unbinder = ButterKnife.bind(this, rootView);
+        setHasOptionsMenu(true);
         defineEditText();
         defineQueryTypeSpinner();
         defineSpinnerListener();
@@ -156,6 +162,32 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
     @Override
     public void showInputError() {
         Toast.makeText(getActivity(), getString(R.string.input_error), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.numbers_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_share:
+                defineShareIntent();
+                startActivity(Intent.createChooser(mSharingIntent, getString(R.string.share_chooser_title)));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    private void defineShareIntent() {
+        mSharingIntent = new Intent(Intent.ACTION_SEND);
+        mSharingIntent.setType("text/plain");
+        String quoteTextForShareBody = "\"" + mDescription.getText().toString() + "\"";
+        mSharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.current_number_share_intent_theme));
+        mSharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, quoteTextForShareBody);
     }
 
     @Override
