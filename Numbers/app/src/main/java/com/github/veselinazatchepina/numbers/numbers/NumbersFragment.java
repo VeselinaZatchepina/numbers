@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.veselinazatchepina.numbers.R;
 
@@ -75,7 +76,7 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                mPresenter.updateNumberForSave();
             }
         });
     }
@@ -150,6 +151,11 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
     @Override
     public void setSpinnerPosition(int position) {
         mSpinner.setSelection(position);
+    }
+
+    @Override
+    public void showInputError() {
+        Toast.makeText(getActivity(), getString(R.string.input_error), Toast.LENGTH_LONG).show();
     }
 
     @Override

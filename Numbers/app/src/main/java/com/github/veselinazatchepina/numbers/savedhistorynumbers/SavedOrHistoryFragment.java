@@ -254,7 +254,6 @@ public class SavedOrHistoryFragment extends Fragment implements SavedOrHistoryCo
                 if (shareActionProvider != null) {
                     shareActionProvider.setShareIntent(mSharingIntent);
                 }
-
             }
 
             private void openDeleteNumberDialog() {

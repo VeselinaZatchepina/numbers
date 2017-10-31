@@ -11,6 +11,8 @@ public interface NumbersContract {
         void setNumberDescription(String description);
 
         void setSpinnerPosition(int position);
+
+        void showInputError();
     }
 
     interface Presenter extends BasePresenter {
@@ -20,5 +22,7 @@ public interface NumbersContract {
         void getNumberDescription(String number, String queryType);
 
         void defineSpinnerPosition(CharSequence charSequence);
+
+        void updateNumberForSave();
     }
 }

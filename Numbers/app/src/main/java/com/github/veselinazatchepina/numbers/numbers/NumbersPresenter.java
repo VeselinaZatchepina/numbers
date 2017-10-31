@@ -102,7 +102,8 @@ public class NumbersPresenter implements NumbersContract.Presenter {
 
                     @Override
                     public void onError(Throwable t) {
-
+                        mNumbersForSave = null;
+                        mNumbersView.showInputError();
                     }
 
                     @Override
@@ -127,7 +128,8 @@ public class NumbersPresenter implements NumbersContract.Presenter {
 
                     @Override
                     public void onError(Throwable t) {
-
+                        mNumberForSave = null;
+                        mNumbersView.showInputError();
                     }
 
                     @Override
@@ -150,6 +152,16 @@ public class NumbersPresenter implements NumbersContract.Presenter {
     public void defineSpinnerPosition(CharSequence charSequence) {
         if (charSequence.toString().contains("/")) {
             mNumbersView.setSpinnerPosition(2);
+        }
+    }
+
+    @Override
+    public void updateNumberForSave() {
+        if (mNumberForSave != null) {
+            mNumberForSave = null;
+        }
+        if (mNumbersForSave != null) {
+            mNumbersForSave = null;
         }
     }
 }

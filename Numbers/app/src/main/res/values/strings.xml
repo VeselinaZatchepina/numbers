@@ -18,6 +18,7 @@
     <string name="spinner_hint">Choose query type</string>
     <string name="button_text">Submit</string>
     <string name="empty_description_text">No description</string>
+    <string name="input_error">Input is not correct</string>
 
     <!-- SavedOrHistoryFragment -->
     <string name="description_empty_view">You don\'t have any data</string>
