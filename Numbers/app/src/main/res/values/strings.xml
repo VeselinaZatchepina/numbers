@@ -21,6 +21,10 @@
     <string name="input_error">Input is not correct</string>
     <string name="share">Share</string>
     <string name="question_button_text">\?</string>
+    <string name="hint_text">You can pass: \n \n
+        number: 2 \n
+        range: 1..3 or 1,4,7 \n
+        date: 2(day)/30(month)</string>
 
     <!-- SavedOrHistoryFragment -->
     <string name="description_empty_view">You don\'t have any data</string>

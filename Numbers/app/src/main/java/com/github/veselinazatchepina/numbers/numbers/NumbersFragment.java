@@ -2,6 +2,7 @@ package com.github.veselinazatchepina.numbers.numbers;
 
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,10 +15,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,8 @@ import butterknife.Unbinder;
 
 public class NumbersFragment extends Fragment implements NumbersContract.View {
 
+    @BindView(R.id.question_button)
+    Button mQuestionButton;
     @BindView(R.id.number_value)
     EditText mNumberValue;
     @BindView(R.id.submit_button)
@@ -60,12 +65,40 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
         View rootView = inflater.inflate(R.layout.fragment_numbers, container, false);
         unbinder = ButterKnife.bind(this, rootView);
         setHasOptionsMenu(true);
+        defineQuestionButton();
         defineEditText();
         defineQueryTypeSpinner();
         defineSpinnerListener();
         defineSubmitButton();
         defineFab();
         return rootView;
+    }
+
+    private void defineQuestionButton() {
+        mQuestionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openPopupMenu(view);
+            }
+        });
+    }
+
+    private void openPopupMenu(View view) {
+        PopupWindow popup = new PopupWindow(getActivity());
+        View layout = getActivity().getLayoutInflater().inflate(R.layout.poup_hint, null);
+        popup.setContentView(layout);
+        // Set content width and height
+        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+        // Closes the popup window when touch outside of it - when looses focus
+        popup.setOutsideTouchable(true);
+        popup.setFocusable(true);
+        popup.setBackgroundDrawable(new BitmapDrawable());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            popup.setElevation(2);
+        }
+        // Show anchored to button
+        popup.showAsDropDown(view, -250, 20);
     }
 
     private void defineEditText() {

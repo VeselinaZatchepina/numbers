@@ -27,6 +27,8 @@
     <dimen name="question_button_height">15dp</dimen>
     <dimen name="question_button_margin_end">36dp</dimen>
     <dimen name="question_button_text_size">8sp</dimen>
+    <dimen name="popup_hint_text_size">10sp</dimen>
+    <dimen name="popup_hint_margin">8dp</dimen>
 
     <!-- SavedOrHistoryFragment -->
     <dimen name="recycler_view_vertical_margin">16dp</dimen>
