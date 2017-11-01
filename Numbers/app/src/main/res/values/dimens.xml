@@ -23,6 +23,10 @@
     <dimen name="button_margin_top">16dp</dimen>
     <dimen name="description_margin_top">36dp</dimen>
     <dimen name="description_margin_bottom">36dp</dimen>
+    <dimen name="question_button_width">15dp</dimen>
+    <dimen name="question_button_height">15dp</dimen>
+    <dimen name="question_button_margin_end">36dp</dimen>
+    <dimen name="question_button_text_size">8sp</dimen>
 
     <!-- SavedOrHistoryFragment -->
     <dimen name="recycler_view_vertical_margin">16dp</dimen>

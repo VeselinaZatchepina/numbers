@@ -20,6 +20,7 @@
     <string name="empty_description_text">No description</string>
     <string name="input_error">Input is not correct</string>
     <string name="share">Share</string>
+    <string name="question_button_text">\?</string>
 
     <!-- SavedOrHistoryFragment -->
     <string name="description_empty_view">You don\'t have any data</string>

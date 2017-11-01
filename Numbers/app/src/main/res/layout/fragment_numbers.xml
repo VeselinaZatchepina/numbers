@@ -28,11 +28,22 @@
                 android:layout_margin="@dimen/linear_layout_margin"
                 android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/question_button"
+                    android:layout_width="@dimen/question_button_width"
+                    android:layout_height="@dimen/question_button_height"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/question_button_margin_end"
+                    android:layout_marginTop="@dimen/button_margin_top"
+                    android:background="@drawable/circle_button"
+                    android:text="@string/question_button_text"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/question_button_text_size"/>
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/numbers_input_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/input_layout_margin_top">
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/number_value"
