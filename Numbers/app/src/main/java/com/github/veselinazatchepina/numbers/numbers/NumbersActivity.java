@@ -29,6 +29,15 @@ public class NumbersActivity extends NavigationDrawerAbstractActivity {
     }
 
     @Override
+    public void defineTitle() {
+        super.defineTitle();
+        String title = getIntent().getStringExtra(NUMBERS_TITLE);
+        if (title != null) {
+            setTitle(title);
+        }
+    }
+
+    @Override
     public void createPresenter() {
         NumbersRepository numbersRepository = NumbersRepository.getInstance(
                 NumbersRemoteDataSource.getInstance(),

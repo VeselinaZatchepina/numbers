@@ -12,6 +12,7 @@
     <string name="numbers_activity_title">Number</string>
     <string name="saved_numbers_activity_title">Saved numbers</string>
     <string name="history_numbers_activity_title">History</string>
+    <string name="about_activity_title">About</string>
 
     <!-- NumbersFragment -->
     <string name="edit_text_hint">Enter number</string>
@@ -41,5 +42,9 @@
     <string name="dialog_cancel_button">CANCEL</string>
     <string name="snack_bar_delete_number_text">Number is deleted</string>
     <string name="snack_bar_delete_all_numbers_text">Numbers is deleted</string>
+
+    <!-- AboutFragment -->
+    <string name="about_text">This application helps you to find meaning of the number. \n
+        Enter number, choose type of fact and submit! \nSave and share it!</string>
 
 </resources>

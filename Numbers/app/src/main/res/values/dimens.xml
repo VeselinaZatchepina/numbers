@@ -45,4 +45,7 @@
     <!-- Delete current number dialog -->
     <dimen name="delete_number_dialog_title_margin">24dp</dimen>
 
+    <!-- AboutFragment -->
+    <dimen name="about_text_view_margin">60dp</dimen>
+
 </resources>

@@ -146,7 +146,7 @@ public class NumbersFragment extends Fragment implements NumbersContract.View {
             @Override
             public void onClick(View view) {
                 mPresenter.getNumberDescription(mNumberValue.getText().toString(),
-                        mSpinner.getSelectedItem().toString());
+                        mSpinner.getSelectedItem().toString().toLowerCase());
             }
         });
     }

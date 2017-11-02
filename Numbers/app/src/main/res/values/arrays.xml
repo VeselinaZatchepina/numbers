@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="query_types">
-        <item>trivia</item>
-        <item>math</item>
-        <item>date</item>
-        <item>year</item>
+        <item>TRIVIA</item>
+        <item>MATH</item>
+        <item>DATE</item>
+        <item>YEAR</item>
     </string-array>
 </resources>

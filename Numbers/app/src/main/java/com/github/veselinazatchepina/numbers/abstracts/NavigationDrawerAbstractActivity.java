@@ -17,9 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.github.veselinazatchepina.numbers.R;
+import com.github.veselinazatchepina.numbers.about.AboutActivity;
 import com.github.veselinazatchepina.numbers.numbers.NumbersActivity;
 import com.github.veselinazatchepina.numbers.savedhistorynumbers.SavedOrHistoryActivity;
 import com.github.veselinazatchepina.numbers.utils.BaseSchedulerProvider;
+import com.github.veselinazatchepina.numbers.utils.ColorationTextChar;
 import com.github.veselinazatchepina.numbers.utils.SchedulerProvider;
 
 import butterknife.BindView;
@@ -42,6 +44,7 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
         ButterKnife.bind(this);
         defineNavigationDrawer();
         defineTitle();
+        setTitle(ColorationTextChar.setFirstVowelColor(getTitle().toString(), this));
         defineFragment();
         createPresenter();
     }
@@ -102,7 +105,6 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.menu_numbers:
                 intent = NumbersActivity.newIntent(this, getString(R.string.numbers_activity_title));
-                ;
                 break;
             case R.id.menu_saved_numbers:
                 intent = SavedOrHistoryActivity.newIntent(this, getString(R.string.saved_numbers_activity_title));
@@ -111,7 +113,7 @@ public abstract class NavigationDrawerAbstractActivity extends AppCompatActivity
                 intent = SavedOrHistoryActivity.newIntent(this, getString(R.string.history_numbers_activity_title));
                 break;
             case R.id.menu_about:
-                intent = null;
+                intent = AboutActivity.newIntent(this, getString(R.string.about_activity_title));
                 break;
         }
         if (intent != null) {
