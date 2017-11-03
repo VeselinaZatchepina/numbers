@@ -1,5 +1,7 @@
 <h1>Numbers</h1>
 
+Работа через http://numbersapi.com/
+
 <p> Приложение позволяет найти данные определенной категории, связанные с введенным числом, диапазоном или датой. </p>
 
 <img src="https://github.com/VeselinaZatchepina/numbers/blob/master/screenshots/main_activity.png" width="250px" hspace="15"/> 
